@@ -1,66 +1,106 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Installing Laravel from GitHub Repository and Setting Up Local Environment
+To install a Laravel application from a GitHub repository and run it locally on your machine, follow these steps:
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Step 1: Clone the Repository
+Open a terminal or command prompt window and run the following command to clone your Laravel repository:
 
-## About Laravel
+bash
+Copy code
+git clone https://github.com/altusHidayat/DIGITAS.git digitas
+This command clones your repository into a directory named digitas.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Step 2: Install Composer Dependencies
+Navigate into the digitas directory:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+bash
+Copy code
+cd digitas
+Install Composer dependencies:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+bash
+Copy code
+composer install
+Step 3: Set Up Environment Variables
+Copy the .env.example file to create a new .env file:
 
-## Learning Laravel
+bash
+Copy code
+cp .env.example .env
+Generate an application key:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+bash
+Copy code
+php artisan key:generate
+Step 4: Laragon Setup
+Open Laragon and start the Apache and MySQL services.
+Access the Laragon MySQL admin panel via http://localhost/phpmyadmin/.
+Create a new database for your Laravel application.
+Step 5: Configure Database Connection
+Open the .env file in your Laravel project directory (digitas), and update the database connection settings:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+dotenv
+Copy code
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=root
+DB_PASSWORD=
+Replace your_database_name with the name of the database you created in Laragon.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Step 6: Run Migrations
+Run database migrations to create tables in your database:
 
-## Laravel Sponsors
+bash
+Copy code
+php artisan migrate
+Step 7: Serve the Application
+Run the Laravel development server:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+bash
+Copy code
+php artisan serve
+Access your Laravel application in your web browser at http://localhost:8000.
 
-### Premium Partners
+Setting Up Databases for Testing
+To set up databases for testing in Laragon, follow these additional steps:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Step 1: Create Databases in Laragon
+Open Laragon and ensure that the Apache and MySQL services are running.
+Access the Laragon MySQL admin panel via http://localhost/phpmyadmin/.
+In the MySQL admin panel, click on the "Databases" tab.
+Enter digitas_db in the "Database name" field and click "Create" to create the first database.
+Repeat the same process to create the second database named digitas2_db.
+Step 2: Configure Laravel Environment
+After creating the databases, update the Laravel environment configuration to use the newly created databases:
 
-## Contributing
+Navigate to your Laravel project directory (digitas).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Open the .env file in a text editor.
 
-## Code of Conduct
+Update the database connection settings to include the newly created databases:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+dotenv
+Copy code
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=digitas_db
+DB_USERNAME=root
+DB_PASSWORD=
 
-## Security Vulnerabilities
+DB_HOST2=127.0.0.1
+DB_PORT2=3306
+DB_DATABASE2=digitas2_db
+DB_USERNAME2=root
+DB_PASSWORD2=
+Update the DB_HOST2, DB_PORT2, DB_DATABASE2, DB_USERNAME2, and DB_PASSWORD2 variables for the digitas2_db database.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Step 3: Run Migrations for Testing Database
+If you want to run migrations for the digitas_db and digitas2_db databases, you can use the --database option with the migrate command:
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+bash
+Copy code
+php artisan migrate --database=digitas_db
+php artisan migrate --database=digitas2_db
+This will run migrations specifically for the digitas_db and digitas2_db databases.
