@@ -69,7 +69,7 @@
                              <label for="">Api Url :</label>
                              <input type="text" value="https://dummyjson.com/products" name="apiUrl"
                                  class="form-control">
-                             <input type="text" name="connection" id="fetchApiConn">
+                             <input type="hidden" name="connection" id="fetchApiConn">
                          </div>
 
                          <div class="form-group">
@@ -93,7 +93,7 @@
                          <div class="form-group">
                              <label for="formFile" class="form-label">Excel File :</label>
                              <input class="form-control" type="file" name="file" id="formFile" accept=".xlsx, .xls">
-                             <input type="text" name="connection" id="fetchExcelConn">
+                             <input type="hidden" name="connection" id="fetchExcelConn">
                          </div>
                          <div class="form-group">
                              <button type="submit" class="btn btn-primary">Fetch Data</button>

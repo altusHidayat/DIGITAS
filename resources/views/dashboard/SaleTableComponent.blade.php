@@ -4,7 +4,7 @@
             float: inline-end !important;
         }
     </style>
-    <div class="col-lg-6 mb-4">
+    <div class="col-lg-12 mb-4">
         <div class="card shadow mb-4">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -82,7 +82,9 @@
             </div>
         </div>
     </div>
+</div>
 
+<div class="row">
     <div class="col-lg-6 mb-4">
         <div class="card shadow mb-4">
             <div class="card shadow mb-4">
@@ -112,4 +114,70 @@
             </div>
         </div>
     </div>
+
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Products </h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered" id="productTable" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Description</th>
+                                <th>Price per unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if ($products)
+                                @foreach ($products as $product)
+                                    <tr>
+                                        <td>{{ $product->product_name ?? '' }}</td>
+                                        <td>{{ $product->product_desc ?? '' }}</td>
+                                        <td>{{ number_format($product->price, 2, '.', ',') }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- <div class="col-lg-6 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Customers </h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered" id="customerTable" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if ($customers)
+                                @foreach ($customers as $customer)
+                                    <tr>
+                                        <td>{{ $customer->customer_name ?? '' }}</td>
+                                        <td>{{ $customer->address ?? '' }}</td>
+                                        <td>{{ $customer->phone ?? '' }}</td>
+                                        <td>{{ $customer->email ?? '' }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> --}}
 </div>

@@ -25,16 +25,17 @@ class LoginController extends Controller
     {
         $data['db'] = 'db2';
 
-       
+        Config::set('database.default', $data['db']);
+
         if ($r->connection) {
             Config::set('database.default', $r->connection);
+            $data['db'] = $r->connection;
+        }
 
-                $data['db'] = $r->connection;
-        }else{
-                    Config::set('database.default', session('db'));
-                $data['db'] = session('db');
-            }
-        
+        if (session('db')) {
+            Config::set('database.default', session('db'));
+            $data['db'] = session('db');
+        }
         $data['startDate'] = '';
         $data['endDate'] = '';
         if ($r->startDate && $r->endDate) {
@@ -54,11 +55,12 @@ class LoginController extends Controller
 
         $data['salesOverall'] = number_format($this->sm->getTotalSalesOverall(), 2, '.', ',');
         $data['salesCurrentYear'] = number_format($this->sm->getTotalSalesCurrentYear(), 2, '.', ',');
-        $data['totalCustomer'] =  $this->cm->getTotalCustomer();
+        $data['totalCustomer'] = $this->cm->getTotalCustomer();
         $data['totalProduct'] = $this->pm->getTotalProduct();
         $data['products'] = $this->pm->all();
         $data['customers'] = $this->cm->all();
         $data['saleByMonth'] = $this->sm->getSaleByMonth();
+        $data['topSaleByProduct'] = $this->sm->getTopSaleByProduct();
 
         $growthDatas = $this->sm->growthRate();
 

@@ -44,28 +44,35 @@ class ApiController extends Controller
 
                 Product::create($productInsert);
 
-                $newProduct = Product::latest()->first();
+                $newProduct = Product::count();
+                if ($newProduct > 0) {
 
-                $randomMonth = rand(1, 12);
+                    $product_id = rand(1, $newProduct);
 
-                $randomYear = rand(2020, date('Y'));
+                    $product = Product::find($product_id);
 
-                // auto generate sale data
-                $saleData = [
-                    'product_id' => $newProduct->id,
-                    'quantity' => 1,
-                    'total_value' => $newProduct->price,
-                    'customer_id' => 1,
-                    'month' => $randomMonth,
-                    'year' => $randomYear,
-                ];
+                    $randomMonth = rand(1, 12);
 
-                Sale::create($saleData);
+                    $randomYear = rand(2020, date('Y'));
+
+                    // auto generate sale data
+                    $saleData = [
+                        'product_id' => $product_id,
+                        'quantity' => 1,
+                        'total_value' => $product->price,
+                        'customer_id' => 1,
+                        'month' => $randomMonth,
+                        'year' => $randomYear,
+                    ];
+
+                    Sale::create($saleData);
+                }
+
             }
 
 
 
-            return redirect()->back()->with(['success'=> "Success fetch data from RESTful api", "db" => $db]);
+            return redirect()->back()->with(['success' => "Success fetch data from RESTful api", "db" => $db]);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage());
         }

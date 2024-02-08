@@ -63,6 +63,29 @@ class Sale extends Model
             ->get();
     }
 
+    public function getTopSaleByProduct()
+    {
+        $top3Sales = $this->with([
+            'product' => function ($query) {
+                $query->select('id', 'product_name');
+            }
+        ])->select('product_id', DB::raw('SUM(quantity) as total_quantity_sold'), DB::raw('SUM(total_value) as total_sale'))
+            ->groupBy('product_id')
+            ->orderByDesc('total_sale')
+            ->take(3)
+            ->get();
+
+        $result = [];
+
+        foreach ($top3Sales as $top) {
+            $result['total_sale'][] = [$top->total_sale];
+
+            $result['product'][] = [$top->product->product_name];
+        }
+
+        return $result;
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
