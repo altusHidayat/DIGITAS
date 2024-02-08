@@ -24,10 +24,16 @@ class LoginController extends Controller
     public function dashboardView(Request $r)
     {
         $data['db'] = 'db2';
+
+       
         if ($r->connection) {
-        Config::set('database.default', $r->connection);
-        $data['db'] = $r->connection;
-        }
+            Config::set('database.default', $r->connection);
+
+                $data['db'] = $r->connection;
+        }else{
+                    Config::set('database.default', session('db'));
+                $data['db'] = session('db');
+            }
         
         $data['startDate'] = '';
         $data['endDate'] = '';
@@ -44,7 +50,7 @@ class LoginController extends Controller
 
         $data['totalSales'] = $querySales->sum('total_value');
 
-        $data['sales'] = $querySales->paginate(5);
+        $data['sales'] = $querySales->get();
 
         $data['salesOverall'] = number_format($this->sm->getTotalSalesOverall(), 2, '.', ',');
         $data['salesCurrentYear'] = number_format($this->sm->getTotalSalesCurrentYear(), 2, '.', ',');

@@ -7,6 +7,7 @@ use App\Models\Sale;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Config;
 
 class ApiController extends Controller
 {
@@ -14,6 +15,13 @@ class ApiController extends Controller
     {
         $client = new Client();
         $apiUrl = $r->apiUrl;
+
+        $db = env('DB_CONNECTION');
+
+        if ($r->connection) {
+            Config::set('database.default', $r->connection);
+            $db = $r->connection;
+        }
 
         try {
             $response = $client->get($apiUrl, [
@@ -57,7 +65,7 @@ class ApiController extends Controller
 
 
 
-            return redirect()->back()->with('success', "Success fetch data from RESTful api");
+            return redirect()->back()->with(['success'=> "Success fetch data from RESTful api", "db" => $db]);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage());
         }

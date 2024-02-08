@@ -11,34 +11,15 @@ use Illuminate\Support\Facades\Config;
 
 class ExcelController extends Controller
 {
-    // public function upload(Request $r)
-    // {
-
-    //     $r->validate([
-    //         'file' => 'required|mimes:xlsx,xls|max:2048',
-    //     ], [
-    //         'file.mimes' => 'The uploaded file must be an Excel spreadsheet (XLSX or XLS).',
-    //     ]);
-
-    //     $file = $r->file('file');
-
-    //     $status = 'success';
-    //     $msg = 'Success upload data from excel';
-
-    //     $import = new SaleImport();
-    //     try {
-    //         Excel::import($import, $file);
-    //     } catch (\Throwable $th) {
-    //         $status = 'error';
-    //         $msg = 'Error upload data from excel. File format is difference from template given. Please download from link above.';
-    //     }
-
-    //     return redirect()->back()->with($status, $msg);
-    // }
-
-
     public function upload(Request $r, $type)
     {
+
+        $db = env('DB_CONNECTION');
+
+        if ($r->connection) {
+            Config::set('database.default', $r->connection);
+            $db = $r->connection;
+        }
 
         $r->validate([
             'file' => 'required|mimes:xlsx,xls|max:2048',
@@ -70,6 +51,6 @@ class ExcelController extends Controller
             $msg = 'Error upload data from excel. File format is difference from template given. Please download from link above.';
         }
 
-        return redirect()->back()->with($status, $msg);
+        return redirect()->back()->with([$status => $msg, 'db' => $db]);
     }
 }

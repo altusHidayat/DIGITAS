@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>DIGITAS - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="/assets/template/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/assets/template/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
@@ -276,7 +277,9 @@
         </div>
     </div>
 
+    {{-- jquery --}}
     <script src="/assets/template/vendor/jquery/jquery.min.js"></script>
+
     <script src="/assets/template/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -295,6 +298,8 @@
     <!-- Page level plugins -->
     <script src="/assets/template/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/template/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+
 
     <!-- Page level custom scripts -->
     <script src="/assets/template/js/demo/datatables-demo.js"></script>

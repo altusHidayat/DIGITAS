@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+    digitas:
+        build:
+            context: "C:/Users/Asus/PROJECT/PERSONAL/DIGITAS/docker/web"
+            dockerfile: Dockerfile
+        ports:
+            - 10000:80
+        restart: always
+        volumes:
+            - C:/Users/Asus/PROJECT/PERSONAL/DIGITAS:/var/www/html
+
+    database:
+        image: mariadb
+        restart: always
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: 123
+        volumes:
+            - db_data:/var/lib/mysql
+
+    # aes:
+    #     build:
+    #         context: ~/NADIBINARI/ATTENDANCE/docker/web
+    #         dockerfile: Dockerfile
+    #     ports:
+    #         - 8000:80
+    #     volumes:
+    #         - ~/NADIBINARI/ALTUS-LOGISTIC:/var/www/html
+
+    # edaran:
+    #     build:
+    #         context: ~/NADIBINARI/ATTENDANCE/docker/web
+    #         dockerfile: Dockerfile
+    #     ports:
+    #         - 8001:80
+    #     volumes:
+    #         - ~/freelance/Orbit-HRMS-New:/var/www/html
+
+    # afm:
+    #     build:
+    #         context: ~/NADIBINARI/ATTENDANCE/docker/web
+    #         dockerfile: Dockerfile
+    #     ports:
+    #         - 8002:80
+    #     volumes:
+    #         - ~/NADIBINARI/AFM_TEMP:/var/www/html
+
+    redis:
+        restart: always
+        image: redis:latest
+        ports:
+            - "6379:6379"
+
+volumes:
+    db_data:
