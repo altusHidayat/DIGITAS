@@ -8,7 +8,7 @@ use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
-class LoginController extends Controller
+class DashboardController extends Controller
 {
     private $cm;
     private $pm;

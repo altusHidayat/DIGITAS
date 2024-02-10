@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\ExcelController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('login.loginView');
 });
 
-Route::controller(LoginController::class)->group(function () {
+Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard', 'dashboardView');
     Route::post('/dashboard', 'dashboardView');
 });

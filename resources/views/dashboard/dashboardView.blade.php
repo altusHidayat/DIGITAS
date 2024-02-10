@@ -68,7 +68,7 @@
                          <div class="form-group">
                              <label for="">Api Url :</label>
                              <input type="text" value="https://dummyjson.com/products" name="apiUrl"
-                                 class="form-control">
+                                 class="form-control" readonly>
                              <input type="hidden" name="connection" id="fetchApiConn">
                          </div>
 

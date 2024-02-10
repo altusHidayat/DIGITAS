@@ -18,14 +18,18 @@
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Top 3 Highest Sale Product</h6>
             </div>
-            <input type="hidden" id="total_sale_top_3" value="{{ json_encode($topSaleByProduct['total_sale']) }}">
-            <input type="hidden" id="product_top_3" value="{{ json_encode($topSaleByProduct['product']) }}">
+            @php
+                $saleByProduct = $topSaleByProduct['total_sale'] ?? '';
+                $productTop3 = $topSaleByProduct['product'] ?? '';
+            @endphp
+            <input type="hidden" id="total_sale_top_3" value="{{ json_encode($saleByProduct) }}">
+            <input type="hidden" id="product_top_3" value="{{ json_encode($productTop3) }}">
             <div class="card-body">
                 <div class="chart-pie pt-4 pb-2">
                     <canvas id="myPieChart"></canvas>
                 </div>
                 <div class="mt-4 text-center small">
-                    @if ($topSaleByProduct['product'])
+                    @if ($topSaleByProduct)
                         @php
                             $classCss = ['primary', 'success', 'info'];
                         @endphp

@@ -20,6 +20,15 @@ services:
             MYSQL_ROOT_PASSWORD: 123
         volumes:
             - db_data:/var/lib/mysql
+    
+    redis:
+        restart: always
+        image: redis:latest
+        ports:
+            - "6379:6379"
+
+volumes:
+    db_data:
 
     # aes:
     #     build:
@@ -47,12 +56,3 @@ services:
     #         - 8002:80
     #     volumes:
     #         - ~/NADIBINARI/AFM_TEMP:/var/www/html
-
-    redis:
-        restart: always
-        image: redis:latest
-        ports:
-            - "6379:6379"
-
-volumes:
-    db_data:
